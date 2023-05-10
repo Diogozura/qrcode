@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gerador de QR Code</title>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+  <h1>Gerador de QR Code</h1>
+  <p>Insira o link abaixo:</p>
+  <input type="text" id="input" />
+  <button onclick="generate()">Gerar QR Code</button>
+  <br />
+  <br />
+  <div id="qrcode"></div>
+  <a id="downloadLink" download="qrcode.png" style="display:none">Baixar QR Code</a>
+  <script>
+    function generate() {
+      var input = document.getElementById("input").value;
+      var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: input,
+        width: 256,
+        height: 256,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+      var canvas = document.getElementsByTagName("canvas")[0];
+      var downloadLink = document.getElementById("downloadLink");
+      downloadLink.href = canvas.toDataURL("image/png");
+      downloadLink.style.display = "block";
+    }
+  </script>
+</body>
+</html>
